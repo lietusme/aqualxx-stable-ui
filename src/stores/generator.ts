@@ -193,14 +193,14 @@ export const useGeneratorStore = defineStore("generator", () => {
     const filteredAvailableModels = computed(() => {
         if (availableModels.value.length === 0) return [];
         let filtered = availableModels.value.filter(el => {
-            const valueIncludesInpainting = el.value.toLowerCase().includes("inpainting")
+            const isInpaintingModel = el.value.toLowerCase().includes("inpainting")
             if (generatorType.value === "Inpainting") {
-                return valueIncludesInpainting && el.value !== "Stable Diffusion 2 Depth";
+                return isInpaintingModel && el.value !== "Stable Diffusion 2 Depth";
             }
             if (generatorType.value === "Img2Img") {
-                return el.value !== "stable_diffusion_2.0" && !valueIncludesInpainting;
+                return el.value !== "stable_diffusion_2.0" && !isInpaintingModel;
             }
-            return !valueIncludesInpainting && el.value !== "pix2pix" && el.value !== "Stable Diffusion 2 Depth";
+            return !isInpaintingModel && el.value !== "pix2pix" && el.value !== "Stable Diffusion 2 Depth";
         });
         if (!filtered.find(el => el.value === selectedModel.value)) {
             selectedModel.value = filtered[0].value;
