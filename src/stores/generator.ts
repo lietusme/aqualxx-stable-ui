@@ -194,7 +194,7 @@ export const useGeneratorStore = defineStore("generator", () => {
         if (availableModels.value.length === 0) return [];
         let filtered = availableModels.value.filter(el => {
             if (generatorType.value === "Inpainting") {
-                return el.value.includes("inpainting") && el.value !== "Stable Diffusion 2 Depth";
+                return (el.value.includes("inpainting") || el.value.includes("Inpainting")) && el.value !== "Stable Diffusion 2 Depth";
             }
             if (generatorType.value === "Img2Img") {
                 return el.value !== "stable_diffusion_2.0" && !el.value.includes("inpainting");
